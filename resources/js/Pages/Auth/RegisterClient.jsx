@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function RegisterClient() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -16,13 +16,13 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'), {
+        post(route('client-register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout client={true}>
             <Head title="Register" />
 
             <form onSubmit={submit}>

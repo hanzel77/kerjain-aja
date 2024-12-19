@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\CheckClient;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -12,7 +13,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -21,6 +22,15 @@ Route::get('/dashboard', function () {
 Route::get('/explore', function () {
     return Inertia::render('Explore');
 })->middleware(['auth', 'verified'])->name('explore');
+
+
+// Client
+Route::middleware(['auth', CheckClient::class])->group(function () {
+    Route::get('/client/home', function () {
+        return Inertia::render('Client/ClientHome');
+    })->name('client-home');
+});
+
 
 
 Route::middleware('auth')->group(function () {

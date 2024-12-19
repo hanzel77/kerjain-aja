@@ -66,30 +66,39 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4 block">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) =>
-                                setData('remember', e.target.checked)
-                            }
-                        />
-                        <span className="ms-2 text-sm text-gray-600">
-                            Remember me
-                        </span>
+                    <label className="flex items-center justify-between">
+                        <div>
+                            <Checkbox
+                                name="remember"
+                                checked={data.remember}
+                                onChange={(e) =>
+                                    setData('remember', e.target.checked)
+                                }
+                            />
+                            <span className="ms-2 text-sm text-gray-600">
+                                Remember me
+                            </span>
+                        </div>
+
+                        {canResetPassword && (
+                            <Link
+                                href={route('password.request')}
+                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
+                <div className="mt-4 flex items-center justify-between">
+                    <Link
+                        href={route('register')}
+                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                    >
+                        Dont have an account?
+                    </Link>
+                    
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>

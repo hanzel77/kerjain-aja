@@ -4,23 +4,25 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+class ClientSessionController extends Controller
 {
     /**
-     * Display the registration view.
+     * Display the login view.
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/RegisterClient');    
     }
 
     /**
@@ -40,13 +42,12 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'worker'
+            'role' => 'client'
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
-
-        return redirect(route('explore', absolute: false));
+        
+        return redirect(route('client-home', absolute: false));
     }
 }

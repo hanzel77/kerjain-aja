@@ -2,25 +2,33 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogoClient from '@/Components/ApplicationLogoClient';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AuthenticatedNavbar() {
+export default function AuthenticatedNavbar({client}) {
 
     const user = usePage().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
+    console.log(user)
     if(user != null){
         return(
-            <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <nav className="border-b border-gray-100 bg-white z-50">
+                <div className="mx-auto max-w-7xl px-3 sm:px-0">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
+                                {client ? (
+                                    <Link href="/client/home">
+                                        <ApplicationLogoClient className="block h-9 w-auto fill-current text-gray-800 rounded" />
+                                    </Link>
+                                ): (
+                                    <Link href="/">
+                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    </Link>
+                                )}
+                                
                             </div>
     
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -165,13 +173,19 @@ export default function AuthenticatedNavbar() {
     }else{
         return(
             <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl px-3 xl:px-0">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
+                                {client ? (
+                                    <Link href="/client/home">
+                                        <ApplicationLogoClient className="block h-9 w-auto fill-current text-gray-800 rounded" />
+                                    </Link>
+                                ) : (
+                                    <Link href="/">
+                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    </Link>
+                                )}
                             </div>
     
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -184,11 +198,28 @@ export default function AuthenticatedNavbar() {
                             </div>
                         </div>
     
-                        <div className="ms-6 flex items-center">
-                            <div className="relative ms-3">
-                                <Link href={route('login')}>
-                                    Log In
-                                </Link>
+                        <div className="flex items-center">
+                            <div className="relative ms-3 ">
+                                
+                                {client ? (
+                                    <Link href={route('client-register')} className='text-gray-600 hover:text-gray-900 transition-colors'>
+                                        Register
+                                    </Link>
+                                ) : (
+                                    <Link href={route('login')} className='text-gray-600 hover:text-gray-900 transition-colors'>
+                                        Log In
+                                    </Link>
+                                )}
+                                {client ? (
+                                    <Link className='ms-4' href="/">
+                                        <button className='border-2  border-primary px-2 py-1 bg-primary text-white hover:bg-white hover:text-black transition-colors rounded'> Penyedia Jasa?</button>
+                                    </Link>
+                                ) : (
+                                    <Link className='ms-4' href={route('client-home')}>
+                                        <button className='border-2  border-primary px-2 py-1 bg-primary text-white hover:bg-white hover:text-black transition-colors rounded'> Pencari Jasa?</button>
+                                    </Link>
+                                )}
+                                
                             </div>
                         </div>
                     </div>
