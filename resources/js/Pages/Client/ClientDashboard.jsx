@@ -2,11 +2,10 @@ import AuthenticatedNavbar from '@/Components/AuthenticatedNavbar';
 import Footer from '@/Components/Footer';
 import { Head, Link } from '@inertiajs/react';
 
-export default function ClientHome({ auth }) {
-
-    return (
+export default function ClientDashboard(){
+    return(
         <>
-            <Head title="Client Home" />
+            <Head title="Client Dashboard" />
             <div>
                 <header>
                     <AuthenticatedNavbar client={true} />
@@ -17,7 +16,7 @@ export default function ClientHome({ auth }) {
                             <div className='bg-black w-full h-full absolute opacity-50'></div>
                             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                                 <div className='text-center'>
-                                    
+
                                     <h1 className="text-4xl md:text-6xl font-bold text-white">
                                         Selamat Datang di <span className="text-tertiary">KerjainAja Client</span>
                                     </h1>
@@ -38,5 +37,5 @@ export default function ClientHome({ auth }) {
                 <Footer />
             </div>
         </>
-    );
+    )
 }

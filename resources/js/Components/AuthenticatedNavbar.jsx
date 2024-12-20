@@ -32,12 +32,36 @@ export default function AuthenticatedNavbar({client}) {
                             </div>
     
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                {client ? (
+                                    <>
+                                        <NavLink
+                                            href={route('client-dashboard')}
+                                            active={route().current('client-dashboard')}
+                                        >
+                                            Dashboard
+                                        </NavLink>
+                                        <NavLink
+                                            href={route('client-explore')}
+                                            active={route().current('client-explore')}
+                                        >
+                                            Explore
+                                        </NavLink>
+                                        <NavLink
+                                            href={route('client-jobs')}
+                                            active={route().current('client-jobs')}
+                                        >
+                                            Jobs
+                                        </NavLink>
+                                    </>
+                                ):(
                                 <NavLink
                                     href={route('explore')}
                                     active={route().current('explore')}
                                 >
                                     Explore
                                 </NavLink>
+                                )}
+                                
                             </div>
                         </div>
     

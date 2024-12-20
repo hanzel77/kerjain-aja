@@ -25,10 +25,22 @@ Route::get('/explore', function () {
 
 
 // Client
+Route::get('/client/home', function () {
+    return Inertia::render('Client/ClientHome');
+})->name('client-home');
+
 Route::middleware(['auth', CheckClient::class])->group(function () {
-    Route::get('/client/home', function () {
-        return Inertia::render('Client/ClientHome');
-    })->name('client-home');
+    Route::get('/client/dashboard', function () {
+        return Inertia::render('Client/ClientDashboard');
+    })->name('client-dashboard');
+
+    Route::get('/client/explore', function () {
+        return Inertia::render('Client/ClientExplore');
+    })->name('client-explore');
+
+    Route::get('/client/jobs', function () {
+        return Inertia::render('Client/ClientJobs');
+    })->name('client-jobs');
 });
 
 

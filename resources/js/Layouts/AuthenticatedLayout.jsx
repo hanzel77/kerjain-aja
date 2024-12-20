@@ -1,17 +1,12 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import AuthenticatedNavbar from '@/Components/AuthenticatedNavbar';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
 
-export default function AuthenticatedLayout({ header, children }) {
+
+export default function AuthenticatedLayout({ header, children, client }) {
 
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <AuthenticatedNavbar></AuthenticatedNavbar>
+            <AuthenticatedNavbar client={client}></AuthenticatedNavbar>
 
             {header && (
                 <header className="bg-white shadow">
