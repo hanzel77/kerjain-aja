@@ -20,7 +20,7 @@ export default function AuthenticatedNavbar({client}) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 {client ? (
-                                    <Link href="/client/home">
+                                    <Link href="/client">
                                         <ApplicationLogoClient className="block h-9 w-auto fill-current text-gray-800 rounded" />
                                     </Link>
                                 ): (
@@ -54,12 +54,27 @@ export default function AuthenticatedNavbar({client}) {
                                         </NavLink>
                                     </>
                                 ):(
-                                <NavLink
-                                    href={route('explore')}
-                                    active={route().current('explore')}
-                                >
-                                    Explore
-                                </NavLink>
+                                <>
+                                    <NavLink
+                                        href={route('explore')}
+                                        active={route().current('explore')}
+                                    >
+                                        Explore
+                                    </NavLink>
+                                    <NavLink
+                                        href={route('applications')}
+                                        active={route().current('applications')}
+                                    >
+                                        Applications
+                                    </NavLink>
+                                    <NavLink
+                                        href={route('bookmarks')}
+                                        active={route().current('bookmarks')}
+                                    >
+                                        Bookmarks
+                                    </NavLink>
+                                </>
+                                
                                 )}
                                 
                             </div>
@@ -160,12 +175,50 @@ export default function AuthenticatedNavbar({client}) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
+                        {client ? (
+                            <>
+                                <ResponsiveNavLink
+                                    href={route('client-dashboard')}
+                                    active={route().current('client-dashboard')}
+                                >
+                                    Dashboard
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('client-explore')}
+                                    active={route().current('client-explore')}
+                                >
+                                    Explore
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('client-jobs')}
+                                    active={route().current('client-jobs')}
+                                >
+                                    Jobs
+                                </ResponsiveNavLink>
+                            </>
+                        ) : (
+                            <>
+                                <ResponsiveNavLink
+                                    href={route('explore')}
+                                    active={route().current('explore')}
+                                >
+                                    Explore
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('applications')}
+                                    active={route().current('applications')}
+                                >
+                                    Applications
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('bookmarks')}
+                                    active={route().current('bookmarks')}
+                                >
+                                    Bookmarks
+                                </ResponsiveNavLink>
+                            </>
+
+                        )}
                     </div>
     
                     <div className="border-t border-gray-200 pb-1 pt-4">

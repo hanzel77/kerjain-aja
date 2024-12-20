@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Middleware\CheckClient;
+use App\Http\Middleware\CheckWorker;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -19,13 +21,26 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/explore', function () {
-    return Inertia::render('Explore');
-})->middleware(['auth', 'verified'])->name('explore');
+Route::get('/explore', function(){
+    return Inertia::render('Worker/Explore');
+})->name('explore');
 
+Route::get('/job-detail/{id}', [JobController::class, 'show']);
+
+// Worker
+Route::middleware(['auth', CheckWorker::class])->group(function (){
+
+    Route::get('/applications', function(){
+        return Inertia::render('Worker/Applications');
+    })->name('applications');
+
+    Route::get('/bookmarks', function(){
+        return Inertia::render('Worker/Bookmarks');
+    })->name('bookmarks');
+});
 
 // Client
-Route::get('/client/home', function () {
+Route::get('/client', function () {
     return Inertia::render('Client/ClientHome');
 })->name('client-home');
 

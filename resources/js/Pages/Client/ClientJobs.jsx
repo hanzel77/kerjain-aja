@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 import JobCard from '@/Components/JobCard';
+import JobsTable from '@/Components/JobsTable';
 
 export default function ClientJobs() {
     return (
@@ -16,14 +17,10 @@ export default function ClientJobs() {
                 </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-8 px-6'>
-                <JobCard />
-                <JobCard />
-                <JobCard />
-                <JobCard />
-                <JobCard />
-                <JobCard />
+            <div className='px-16'>
+                <JobsTable/>
             </div>
+
         </AuthenticatedLayout>
     );
 }

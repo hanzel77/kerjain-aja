@@ -1,8 +1,8 @@
 export default function JobCard(){
     return (
-        <div className='w-full bg-white mx-auto p-6 rounded-md shadow-lg'>
+        <div className='w-full bg-white mx-auto p-6 rounded-md hover:shadow-md transition-shadow' >
             <div className='flex'>
-                <img src="/images/logo.png" alt="logo perusahaan" className='w-1/3 flex-shrink-0' />
+                <img src="/images/logo.png" alt="logo perusahaan" className='w-[40%] flex-shrink-0' />
                 <div className='ps-4'>
                     <h1 className='text-2xl font-semibold'>Pembersih Rumah</h1>
                     <a href="/">
@@ -12,7 +12,6 @@ export default function JobCard(){
             </div>
 
             <div className='mt-6 flex flex-col'>
-
                 <div>
                     <ul>
                         <li>
