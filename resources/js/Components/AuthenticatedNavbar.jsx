@@ -11,7 +11,6 @@ export default function AuthenticatedNavbar({client}) {
     const user = usePage().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-    console.log(user)
     if(user != null){
         return(
             <nav className="border-b border-gray-100 bg-white z-50">
@@ -81,6 +80,12 @@ export default function AuthenticatedNavbar({client}) {
                         </div>
     
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
+                            <div>
+                                <Link  className="inline-flex items-center rounded-md border border-primary bg-primary px-3 py-2 text-sm font-medium leading-4 hover:text-gray-500 transition duration-150 ease-in-out text-white focus:outline-none hover:bg-white" href='/jobs/create'>
+                                    <i className='fa fa-plus'/>
+                                    &nbsp; New Job
+                                </Link>
+                            </div>
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -255,7 +260,7 @@ export default function AuthenticatedNavbar({client}) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 {client ? (
-                                    <Link href="/client/home">
+                                    <Link href="/client">
                                         <ApplicationLogoClient className="block h-9 w-auto fill-current text-gray-800 rounded" />
                                     </Link>
                                 ) : (
@@ -263,15 +268,6 @@ export default function AuthenticatedNavbar({client}) {
                                         <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                     </Link>
                                 )}
-                            </div>
-    
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('explore')}
-                                    active={route().current('explore')}
-                                >
-                                    Explore
-                                </NavLink>
                             </div>
                         </div>
     

@@ -11,7 +11,7 @@ export default function ClientJobs() {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg py-1">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg py-1 border">
                         <input className='w-full border-none focus:ring-0' placeholder='Cari Pekerjaan..' />
                     </div>
                 </div>

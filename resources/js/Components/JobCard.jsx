@@ -1,13 +1,18 @@
-export default function JobCard(){
+import { useState } from 'react';
+
+export default function JobCard() {
+
     return (
-        <div className='w-full bg-white mx-auto p-6 rounded-md hover:shadow-md transition-shadow' >
-            <div className='flex'>
-                <img src="/images/logo.png" alt="logo perusahaan" className='w-[40%] flex-shrink-0' />
-                <div className='ps-4'>
-                    <h1 className='text-2xl font-semibold'>Pembersih Rumah</h1>
-                    <a href="/">
-                        <h2 className='text-sm mt-2 text-blue-700'>KerjainAja</h2>
-                    </a>
+        <div className='w-full bg-white mx-auto p-6 rounded-md hover:shadow-md transition-shadow border border-gray-200'>
+            <div className='flex justify-between'>
+                <div className='flex'>
+                    <img src="/images/logo.png" alt="logo perusahaan" className='w-[40%] flex-shrink-0' />
+                    <div className='ps-4'>
+                        <h1 className='text-2xl font-semibold'>Pembersih Rumah</h1>
+                        <a href="/">
+                            <h2 className='text-sm mt-2 text-blue-700'>KerjainAja</h2>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -22,15 +27,12 @@ export default function JobCard(){
                             <i className='fa fa-dollar-sign'></i>
                             <span className='ps-2'>800.000</span>
                         </li>
-
                     </ul>
                 </div>
 
                 <div className='mt-4'>
                     <p className='text-sm text-gray-600'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
-
-
 
                 <div className='mt-6'>
                     <ul className='list-none pl-0 flex justify-end'>
@@ -66,5 +68,5 @@ export default function JobCard(){
                 </div>
             </div>
         </div>
-    )
+    );
 }

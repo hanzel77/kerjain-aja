@@ -13,7 +13,7 @@ export default function ClientHome({ auth }) {
                 </header>
                 <main>
                     <div className='h-screen'>
-                        <div className='relative w-full h-3/4'>
+                        <div className='relative w-full h-full'>
                             <div className='bg-black w-full h-full absolute opacity-50'></div>
                             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                                 <div className='text-center'>
@@ -22,9 +22,9 @@ export default function ClientHome({ auth }) {
                                         Selamat Datang di <span className="text-tertiary">KerjainAja Client</span>
                                     </h1>
                                     <p className="mt-4 text-lg md:text-xl font-light text-white">
-                                        Platform terbaik untuk menemukan talenta berbakat sesuai kebutuhan Anda. Jelajahi kumpulan penyedia jasa yang siap membantu Anda menyelesaikan pekerjaan, dari skala kecil hingga besar.
+                                        Platform terbaik untuk menemukan <span className="font-semibold text-tertiary">talenta berbakat</span> sesuai kebutuhan Anda. Jelajahi kumpulan penyedia jasa yang siap membantu Anda menyelesaikan pekerjaan, dari skala kecil hingga besar.
                                     </p>
-                                    <div>
+                                    <div className='mt-10'>
                                         <Link href='/client/dashboard'>
                                             <button className='bg-quinary px-4 py-2 rounded-md mt-10 w-1/2 border border-transparent hover:border-white hover:bg-transparent hover:text-white transition-colors duration-200 font-bold tracking-wide'>MULAI SEKARANG !</button>
                                         </Link>
@@ -34,6 +34,40 @@ export default function ClientHome({ auth }) {
                             <img src="/images/home-hero-client.jpg" alt="people sitting discussing" className='object-cover w-full h-full' />
                         </div>
                     </div>
+                    <section className='py-16'>
+                        <div className='max-w-6xl mx-auto px-4'>
+                            <h2 className='text-3xl font-bold text-center text-gray-800'>Kenapa Memilih <span className="text-tertiary">KerjainAja</span>?</h2>
+                            <p className='text-center text-gray-600 mt-4'>Kami menyediakan solusi terbaik untuk mempermudah Anda menemukan tenaga kerja yang sesuai dengan kebutuhan Anda.</p>
+                            <div className='grid md:grid-cols-3 gap-8 mt-10'>
+                                <div className='bg-white shadow-md border p-6 rounded-lg text-center'>
+                                    <i className='fa fa-search text-tertiary text-4xl'></i>
+                                    <h3 className='text-lg font-semibold mt-4'>Pencarian Mudah</h3>
+                                    <p className='text-gray-600 mt-2'>Cari tenaga kerja berdasarkan keterampilan, lokasi, atau kriteria lainnya dengan cepat dan mudah.</p>
+                                </div>
+                                <div className='bg-white shadow-md border p-6 rounded-lg text-center'>
+                                    <i className='fa fa-check-circle text-tertiary text-4xl'></i>
+                                    <h3 className='text-lg font-semibold mt-4'>Tenaga Kerja Terpercaya</h3>
+                                    <p className='text-gray-600 mt-2'>Semua penyedia jasa telah diverifikasi untuk memastikan kualitas dan keamanan layanan.</p>
+                                </div>
+                                <div className='bg-white shadow-md border p-6 rounded-lg text-center'>
+                                    <i className='fa fa-clock text-tertiary text-4xl'></i>
+                                    <h3 className='text-lg font-semibold mt-4'>Efisiensi Waktu</h3>
+                                    <p className='text-gray-600 mt-2'>Hemat waktu Anda dengan fitur pencocokan otomatis yang mempertemukan Anda dengan kandidat terbaik.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className='py-16 bg-secondary text-white'>
+                        <div className='max-w-6xl mx-auto px-4 text-center'>
+                            <h2 className='text-3xl font-bold'>Temukan Tenaga Kerja Terbaik Sekarang</h2>
+                            <p className='mt-4'>Posting lowongan kerja Anda hari ini dan dapatkan kandidat yang sesuai dengan kebutuhan Anda.</p>
+                            <Link href='/client/dashboard'>
+                                <button className='bg-white text-secondary px-6 py-2 mt-6 rounded-md hover:bg-gray-200 transition duration-200 font-bold'>Posting Lowongan</button>
+                            </Link>
+                        </div>
+                    </section>
+
                 </main>
                 <Footer />
             </div>

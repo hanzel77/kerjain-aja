@@ -8,8 +8,11 @@ use Inertia\Inertia;
 
 class JobController extends Controller
 {
-    public function show(string $id)
-    {
+    public function show(string $id){
         return Inertia::render('Worker/JobDetail', ['id' => $id]);
+    }
+
+    public function store(){
+        
     }
 }

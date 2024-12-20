@@ -9,7 +9,7 @@ export default function Explore() {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg py-1">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg py-1 border border-gray-200">
                         <input className='w-full border-none focus:ring-0' placeholder='Cari Pekerjaan..'/>
                     </div>
                 </div>
@@ -20,7 +20,6 @@ export default function Explore() {
                     <div className='border p-4 rounded-lg shadow bg-white sticky top-3'>
                         <h3 className='text-lg font-semibold mb-4 text-primary'>Filters</h3>
 
-                        {/* Location Filter */}
                         <div className='mb-4'>
                             <label className='block text-sm font-medium mb-2 text-primary' htmlFor='location'>
                                 Location
@@ -36,7 +35,6 @@ export default function Explore() {
                             </select>
                         </div>
 
-                        {/* Salary Range Filter */}
                         <div className='mb-4'>
                             <label className='block text-sm font-medium mb-2 text-primary' htmlFor='salary'>
                                 Salary Range
@@ -54,7 +52,6 @@ export default function Explore() {
                             </div>
                         </div>
 
-                        {/* Date Posted Filter */}
                         <div className='mb-4'>
                             <label className='block text-sm font-medium mb-2 text-primary' htmlFor='date-posted'>
                                 Date Posted
@@ -70,7 +67,6 @@ export default function Explore() {
                             </select>
                         </div>
 
-                        {/* Accessible Jobs Only */}
                         <div className='flex items-center mb-4'>
                             <input
                                 type='checkbox'

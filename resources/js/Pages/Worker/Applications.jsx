@@ -33,11 +33,11 @@ export default function Applications(){
                 <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
                     <table class="w-full text-left table-auto min-w-max">
                         <thead>
-                            <tr class="border-b border-slate-300 bg-slate-50">
-                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Client</th>
-                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Name</th>
-                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Date Applied</th>
-                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Status</th>
+                            <tr class="border-b border-slate-300 bg-primary">
+                                <th class="p-4 text-sm font-normal leading-none text-white">Client</th>
+                                <th class="p-4 text-sm font-normal leading-none text-white">Name</th>
+                                <th class="p-4 text-sm font-normal leading-none text-white">Date Applied</th>
+                                <th class="p-4 text-sm font-normal leading-none text-white">Status</th>
                             </tr>
                         </thead>
                         <tbody>

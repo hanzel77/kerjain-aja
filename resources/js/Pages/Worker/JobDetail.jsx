@@ -1,8 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head } from "@inertiajs/react";
 
 export default function JobDetail() {
     return (
         <AuthenticatedLayout>
+            <Head title="Job Detail"/>
             <div className='max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-9'>
                 <div className='flex items-center mb-6'>
                     <img

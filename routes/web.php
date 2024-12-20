@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClientJobController;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -21,11 +22,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/explore', function(){
-    return Inertia::render('Worker/Explore');
-})->name('explore');
 
-Route::get('/job-detail/{id}', [JobController::class, 'show']);
+
 
 // Worker
 Route::middleware(['auth', CheckWorker::class])->group(function (){
@@ -37,6 +35,14 @@ Route::middleware(['auth', CheckWorker::class])->group(function (){
     Route::get('/bookmarks', function(){
         return Inertia::render('Worker/Bookmarks');
     })->name('bookmarks');
+
+    Route::get('/explore', function(){
+        return Inertia::render('Worker/Explore');
+    })->name('explore');
+
+    Route::get('/job-detail/{id}', [JobController::class, 'show']);
+
+
 });
 
 // Client
@@ -56,6 +62,10 @@ Route::middleware(['auth', CheckClient::class])->group(function () {
     Route::get('/client/jobs', function () {
         return Inertia::render('Client/ClientJobs');
     })->name('client-jobs');
+
+    Route::get('/jobs/create',[ClientJobController::class, 'show'])->name('client-create-job');
+
+    Route::post('/jobs/create', [ClientJobController::class, 'store'])->name('jobs.store');
 });
 
 

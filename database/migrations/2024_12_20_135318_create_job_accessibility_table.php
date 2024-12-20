@@ -9,21 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('accommodations', function (Blueprint $table) {
+        Schema::create('job_accessibility', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('type');
+            $table->foreignId('job_id')->constrained('job_vacancy')->onDelete('cascade');
+            $table->foreignId('accessibility_id')->constrained('accessibilities')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('accommodations');
+        Schema::dropIfExists('job_accessibility');
     }
 };

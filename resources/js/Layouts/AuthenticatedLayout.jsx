@@ -5,7 +5,7 @@ export default function AuthenticatedLayout({ header, children, client }) {
 
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen">
             <AuthenticatedNavbar client={client}></AuthenticatedNavbar>
 
             {header && (
