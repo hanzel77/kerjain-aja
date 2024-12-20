@@ -12,7 +12,7 @@ export default function ClientCreateJob() {
         name: '',
         location: '',
         salary: '',
-        type: 'Full-time', // Default job type (full-time)
+        type: 'Full-time',
         description: '',
         accessibility: [],
     });
