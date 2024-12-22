@@ -4,7 +4,7 @@ import JobsTable from '@/Components/JobsTable';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
-export default function ClientDashboard(){
+export default function ClientDashboard(data){
     return(
         <AuthenticatedLayout client={true}>
             <Head title="Client Dashboard" />
@@ -16,7 +16,7 @@ export default function ClientDashboard(){
                                 Jobs Posted
                             </div>
                             <div className='text-6xl font-bold'>
-                                12
+                                {data['jobs'].length}
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@ export default function ClientDashboard(){
                                 Jobs Completed
                             </div>
                             <div className='text-6xl font-bold'>
-                                8
+                                {data['jobs'].filter(job => job.status === 'completed').length}
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ export default function ClientDashboard(){
                                 Active Jobs
                             </div>
                             <div className='text-6xl font-bold'>
-                                4
+                                {data['jobs'].filter(job => job.status === 'open').length}
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ export default function ClientDashboard(){
                             </div>
                         </div>
                     </div>
-                    <JobsTable/>
+                    <JobsTable data={data['jobs']}/>
                 </div>
             </div>
             <Footer />

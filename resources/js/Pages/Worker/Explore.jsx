@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import JobCard from '@/Components/JobCard';
 
-export default function Explore() {
+export default function Explore(data) {
     return (
         <AuthenticatedLayout>
             <Head title="Explore" />
@@ -83,22 +83,15 @@ export default function Explore() {
 
 
                 <div className='w-3/4 grid grid-cols-3 gap-8 px-6'>
-                    <Link href="/job-detail/1">
-                        <JobCard />
-                    </Link>
-                    <Link href="/job-detail/1">
-                        <JobCard />
-                    </Link>
-                    <Link href="/job-detail/1">
-                        <JobCard />
-                    </Link>
-                    <Link href="/job-detail/1">
-                        <JobCard />
-                    </Link>
-                    <Link href="/job-detail/1">
-                        <JobCard />
-                    </Link>
-              
+                    {
+                        data['jobs'].length != 0 ? 
+                        
+                        data['jobs'].map((job) => (
+                            <Link href={`/job-detail/${job.id}`} key={job.id}>
+                                <JobCard job={job} />
+                            </Link>
+                        )) : <div>Sedang tidak ada pekerjaan yang tersedia</div>
+                    }
                 </div>
             </div>
         </AuthenticatedLayout>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['applied', 'interviewed', 'hired', 'rejected']);
             $table->string('cv_path')->nullable();
             $table->string('resume_path')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

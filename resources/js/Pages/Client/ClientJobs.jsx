@@ -1,10 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-
-import JobCard from '@/Components/JobCard';
 import JobsTable from '@/Components/JobsTable';
 
-export default function ClientJobs() {
+export default function ClientJobs(data) {
     return (
         <AuthenticatedLayout client={true}>
             <Head title="Jobs" />
@@ -18,7 +16,7 @@ export default function ClientJobs() {
             </div>
 
             <div className='px-16'>
-                <JobsTable/>
+                <JobsTable data={data['jobs']}/>
             </div>
 
         </AuthenticatedLayout>

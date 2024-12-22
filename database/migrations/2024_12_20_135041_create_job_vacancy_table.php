@@ -16,11 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('location');
-            $table->decimal('salary', 10, 2);
+            $table->integer('salary');
             $table->enum('type', ['full-time', 'part-time', 'intern']);
-            $table->timestamp('date_posted')->useCurrent();
             $table->text('description');
-            $table->text('accessibility')->nullable();
+            $table->json('accessibility')->nullable();
             $table->enum('status', ['open', 'closed'])->default('open');
             $table->timestamps();
         });

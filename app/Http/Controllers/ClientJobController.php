@@ -4,17 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Job_vacancy;
 
 
 class ClientJobController extends Controller
 {
+    public function showJobsDetail(){
+        return Inertia::render('Client/ClientJobsDetail');
+    }
+
+    public function showDashboardPage(){
+        $jobs = Job_vacancy::where('user_id', auth()->user()->id)->get();
+
+        return Inertia::render('Client/ClientDashboard')->with([
+            'jobs' => $jobs
+        ]);
+    }
+
+    public function showJobsPage(){
+        $jobs = Job_vacancy::where('user_id', auth()->user()->id)->get();
+
+        return Inertia::render('Client/ClientJobs')->with([
+            'jobs' => $jobs
+        ]);
+    }
+
     public function show(){
         return Inertia::render('Client/ClientCreateJob');
     }
 
     public function store(Request $request){
-        $accessibility = $request->all()['accessibility'];
-        
+        $data = $request->all();
+
+        $accessibility = $data['accessibility'];
+                
         $categories = [
             'Vision' => ['partially_blind', 'color_blind', 'low_vision'],
             'Hearing' => ['hard_of_hearing', 'deaf_with_accommodations'],
@@ -36,9 +59,20 @@ class ClientJobController extends Controller
             }
         }
 
-        return redirect(route('client-jobs'))
-        ->with('data', $request->all())
-        ->with('groupedAccessibility', $groupedAccessibility);
+        Job_vacancy::insert([
+            'name' => $data['name'],
+            'user_id' => auth()->user()->id,
+            'location' => $data['location'],
+            'description' => $data['description'],
+            'salary' => $data['salary'],
+            'type' => strtolower($data['type']),
+            'status' => 'open',
+            'accessibility' => json_encode($groupedAccessibility),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect(route('client-jobs'));
 
     }
 }

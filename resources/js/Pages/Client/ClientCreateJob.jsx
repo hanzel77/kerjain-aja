@@ -30,7 +30,6 @@ export default function ClientCreateJob() {
             return;
         }
 
-        
         post(route('jobs.store'), {
             data: data,
             onError: (errors) => setErrors(errors),

@@ -6,7 +6,7 @@ import ApplicationLogoClient from '@/Components/ApplicationLogoClient';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AuthenticatedNavbar({client}) {
+export default function     AuthenticatedNavbar({client}) {
 
     const user = usePage().props.auth.user;
 
@@ -80,12 +80,13 @@ export default function AuthenticatedNavbar({client}) {
                         </div>
     
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div>
-                                <Link  className="inline-flex items-center rounded-md border border-primary bg-primary px-3 py-2 text-sm font-medium leading-4 hover:text-gray-500 transition duration-150 ease-in-out text-white focus:outline-none hover:bg-white" href='/jobs/create'>
-                                    <i className='fa fa-plus'/>
+                            {client ? (<div>
+                                <Link className="inline-flex items-center rounded-md border border-primary bg-primary px-3 py-2 text-sm font-medium leading-4 hover:text-gray-500 transition duration-150 ease-in-out text-white focus:outline-none hover:bg-white" href='/jobs/create'>
+                                    <i className='fa fa-plus' />
                                     &nbsp; New Job
                                 </Link>
-                            </div>
+                            </div>) : (<div></div>)}
+                            
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
