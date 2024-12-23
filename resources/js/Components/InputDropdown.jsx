@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import InputLabel from '@/Components/InputLabel'; // Assuming you have an InputLabel component
+import InputLabel from '@/Components/InputLabel'; 
 
 
 export default function InputDropdown ({ label, value, options, onChange }) {
@@ -23,7 +23,7 @@ export default function InputDropdown ({ label, value, options, onChange }) {
             </div>
 
             {isOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
+                <div className="absolute z-10 w-full mt-1 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 max-h-60 overflow-y-auto">
                     {options.map((option) => (
                         <div
                             key={option}

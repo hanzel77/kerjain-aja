@@ -8,9 +8,25 @@ import { Head, useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function ClientCreateJob() {
+    const cities = [
+        "Aceh", "Ambon", "Bali", "Banjarmasin", "Bandung", "Banjarbaru", "Banyuwangi",
+        "Batam", "Bekasi", "Bengkulu", "Blitar", "Bogor", "Bukittinggi", "Cirebon",
+        "Denpasar", "Depok", "Dumai", "Gorontalo", "Jakarta", "Jambi", "Jayapura",
+        "Kediri", "Kendari", "Kupang", "Lampung", "Madiun", "Makassar", "Malang",
+        "Manado", "Mataram", "Medan", "Palangkaraya", "Palembang", "Pekanbaru",
+        "Pontianak", "Probolinggo", "Purwokerto", "Semarang", "Serang", "Singkawang",
+        "Surabaya", "Sukabumi", "Sumedang", "Sungai Penuh", "Surakarta", "Tangerang",
+        "Tegal", "Cimahi", "Cilegon", "Ciputat", "Deli Serdang",
+        "Gresik", "Jakarta Selatan", "Jakarta Timur", "Jakarta Utara", "Jember",
+        "Karawang", "Kuningan", "Lhokseumawe", "Maluku Utara", "Makale",
+        "Manggarai", "Mojokerto", "Pangkal Pinang", "Pati", "Purwakarta", "Samarinda",
+        "Sidoarjo", "Sleman", "Sragen", "Tanjung Pinang", "Ternate", "Yogyakarta",
+        "Magelang", "Bojonegoro"
+    ]
+
     const { data, setData, post } = useForm({
         name: '',
-        location: '',
+        location: 'Medan',
         salary: '',
         type: 'Full-time',
         description: '',
@@ -18,9 +34,6 @@ export default function ClientCreateJob() {
     });
 
     const [errors, setErrors] = useState({});
-
-    
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -93,16 +106,13 @@ export default function ClientCreateJob() {
 
                     {/* Job Location */}
                     <div className="mb-4">
-                        <InputLabel htmlFor="location" value="Location" />
-                        <TextInput
-                            id="location"
-                            name="location"
+                        <InputDropdown
+                            label="Location"
                             value={data.location}
-                            onChange={(e) => setData('location', e.target.value)}
-                            className="mt-1 block w-full"
-                            required
+                            options={cities}
+                            onChange={(location) => setData('location', location)}
+                            className="p-3"
                         />
-                        {errors.location && <div className="text-red-500 text-sm">{errors.location}</div>}
                     </div>
 
                     {/* Salary */}

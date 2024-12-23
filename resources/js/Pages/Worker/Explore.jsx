@@ -42,13 +42,13 @@ export default function Explore(data) {
                             <input
                                 type='range'
                                 id='salary'
-                                min='500000'
-                                max='5000000'
+                                min='1000000'
+                                max='100000000'
                                 step='500000'
                                 className='w-full text-primary accent-primary'
                             />
                             <div className='text-xs text-gray-500 mt-2'>
-                                500,000 - 5,000,000
+                                Rp 1,000,000 - Rp 100,000,000
                             </div>
                         </div>
 
@@ -66,18 +66,6 @@ export default function Explore(data) {
                                 <option value='month'>Last 30 Days</option>
                             </select>
                         </div>
-
-                        <div className='flex items-center mb-4'>
-                            <input
-                                type='checkbox'
-                                id='accessible'
-                                className='w-4 h-4 mr-2 border-primary text-primary rounded focus:ring focus:ring-primary'
-                            />
-                            <label htmlFor='accessible' className='text-sm text-primary'>
-                                Accessible Jobs Only
-                            </label>
-                        </div>
-
                     </div>
                 </div>
 

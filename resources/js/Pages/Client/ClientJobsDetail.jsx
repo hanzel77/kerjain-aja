@@ -90,68 +90,78 @@ export default function ClientJobsDetail(job) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {job.job.applications.map((application) => (
-                                    <tr key={application.id} className="hover:bg-slate-50 border-b border-slate-200">
-                                        <td className="p-4"><img src={application.user.profile_picture ? `/storage/${application.user.profile_picture}` : '/images/default-pp.png'} alt="application picture" className="w-10 h-10 " /></td>
-                                        <td className="p-4">{application.user.name}</td>
-                                        <td className="p-4">
-                                            {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
-                                        </td>
-                                        <td className="p-4">
-                                            <a
-                                                href={'/storage/' + application.cv_path}
-                                                className="text-primary hover:opacity-80"
-                                                download
-                                            >
-                                                Download CV
-                                            </a>
-                                        </td>
-                                        <td className="p-4">
-                                            <a
-                                                href={'/storage/' + application.resume_path}
-                                                className="text-primary hover:opacity-80"
-                                                download
-                                            >
-                                                Download Resume
-                                            </a>
-                                        </td>
-                                        <td className="p-4">
-                                            {application.description}
-                                        </td>
-                                        <td className="p-4">
-                                            {application.status === 'applied' && (
-                                                <>
-                                                    <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-white hover:text-primary transition-all border border-primary" onClick={() => handleStatus('interviewed', application.id)}>
-                                                        Send Interview
-                                                    </button>
-                                                    <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-white border-red-600 ml-2 transition-all border hover:text-red-600" onClick={() => handleStatus('rejected', application.id)}>
-                                                        Reject
-                                                    </button>
-                                                </>
-                                            )}
-                                            {application.status === 'interviewed' && (
-                                                <>
-                                                    <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleStatus('hired', application.id)}>
-                                                        Accept
-                                                    </button>
-                                                    <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 ml-2" onClick={() => handleStatus('rejected', application.id)}>
-                                                        Reject
-                                                    </button>
-                                                </>
-                                            )}
-                                            {
-                                                application.status === 'hired' && (
-                                                    <div className="bg-tertiary py-2 text-white rounded px-4 text-center">Hired</div>
-                                                )
-                                            }
-                                            {
-                                                application.status === 'rejected' && (
-                                                    <div className="bg-red-500 w-full py-2 text-white rounded px-4 text-center">Rejected</div>
-                                                )
-                                            }
+                                {
+                                    job.job.applications.length === 0 ? (
+                                    <tr className='text-center'>
+                                        <td colSpan={7} className='p-3'>
+                                            No Applicants Found 
                                         </td>
                                     </tr>
-                                ))}
+                                    ) : (
+                                        job.job.applications.map((application) => (
+                                            <tr key={application.id} className="hover:bg-slate-50 border-b border-slate-200">
+                                                <td className="p-4"><img src={application.user.profile_picture ? `/storage/${application.user.profile_picture}` : '/images/default-pp.png'} alt="application picture" className="w-10 h-10 " /></td>
+                                                <td className="p-4">{application.user.name}</td>
+                                                <td className="p-4">
+                                                    {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
+                                                </td>
+                                                <td className="p-4">
+                                                    <a
+                                                        href={'/storage/' + application.cv_path}
+                                                        className="text-primary hover:opacity-80"
+                                                        download
+                                                    >
+                                                        Download CV
+                                                    </a>
+                                                </td>
+                                                <td className="p-4">
+                                                    <a
+                                                        href={'/storage/' + application.resume_path}
+                                                        className="text-primary hover:opacity-80"
+                                                        download
+                                                    >
+                                                        Download Resume
+                                                    </a>
+                                                </td>
+                                                <td className="p-4">
+                                                    {application.description}
+                                                </td>
+                                                <td className="p-4">
+                                                    {application.status === 'applied' && (
+                                                        <>
+                                                            <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-white hover:text-primary transition-all border border-primary" onClick={() => handleStatus('interviewed', application.id)}>
+                                                                Send Interview
+                                                            </button>
+                                                            <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-white border-red-600 ml-2 transition-all border hover:text-red-600" onClick={() => handleStatus('rejected', application.id)}>
+                                                                Reject
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                    {application.status === 'interviewed' && (
+                                                        <>
+                                                            <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleStatus('hired', application.id)}>
+                                                                Accept
+                                                            </button>
+                                                            <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 ml-2" onClick={() => handleStatus('rejected', application.id)}>
+                                                                Reject
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                    {
+                                                        application.status === 'hired' && (
+                                                            <div className="bg-tertiary py-2 text-white rounded px-4 text-center">Hired</div>
+                                                        )
+                                                    }
+                                                    {
+                                                        application.status === 'rejected' && (
+                                                            <div className="bg-red-500 w-full py-2 text-white rounded px-4 text-center">Rejected</div>
+                                                        )
+                                                    }
+                                                </td>
+                                            </tr>
+                                        ))
+                                    )
+                                }
                             </tbody>
                         </table>
                     </div>
