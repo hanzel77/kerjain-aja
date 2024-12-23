@@ -26,7 +26,7 @@ export default function ClientDashboard(data){
                                 Jobs Completed
                             </div>
                             <div className='text-6xl font-bold'>
-                                {data['jobs'].filter(job => job.status === 'completed').length}
+                                {data['jobs'].filter(job => job.status === 'closed').length}
                             </div>
                         </div>
                     </div>

@@ -25,15 +25,10 @@ Route::get('/dashboard', function () {
 
 
 
-
 // Worker
 Route::middleware(['auth', CheckWorker::class])->group(function (){
 
     Route::get('/applications',[WorkerController::class, 'showApplicationsPage'])->name('applications');
-
-    Route::get('/bookmarks', function(){
-        return Inertia::render('Worker/Bookmarks');
-    })->name('bookmarks');
 
     Route::get('/explore', [WorkerController::class, 'showExplorePage'])->name('explore');
 
@@ -54,10 +49,6 @@ Route::get('/client', function () {
 Route::middleware(['auth', CheckClient::class])->group(function () {
     Route::get('/client/dashboard', [ClientJobController::class, 'showDashboardPage'])->name('client-dashboard');
 
-    Route::get('/client/explore', function () {
-        return Inertia::render('Client/ClientExplore');
-    })->name('client-explore');
-
     Route::get('/client/jobs', [ClientJobController::class, 'showJobsPage'])->name('client-jobs');
 
     Route::get('/jobs/create',[ClientJobController::class, 'show'])->name('client-create-job');
@@ -65,6 +56,10 @@ Route::middleware(['auth', CheckClient::class])->group(function () {
     Route::post('/jobs/create', [ClientJobController::class, 'store'])->name('jobs.store');
 
     Route::get('/client/jobs/{id}', [ClientJobController::class, 'showJobsDetail'])->name('client-jobs-detail');
+
+    Route::put('/client/jobs/{job_id}/applications/{id}', [ClientJobController::class, 'handleStatus'])->name('handle-status');
+
+    Route::put('/client/jobs/{job_id}', [ClientJobController::class, 'handleJobStatus'])->name('handle-job-status');
 });
 
 

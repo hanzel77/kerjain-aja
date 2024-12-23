@@ -40,12 +40,6 @@ export default function AuthenticatedNavbar({client}) {
                                             Dashboard
                                         </NavLink>
                                         <NavLink
-                                            href={route('client-explore')}
-                                            active={route().current('client-explore')}
-                                        >
-                                            Explore
-                                        </NavLink>
-                                        <NavLink
                                             href={route('client-jobs')}
                                             active={route().current('client-jobs')}
                                         >
@@ -65,12 +59,6 @@ export default function AuthenticatedNavbar({client}) {
                                         active={route().current('applications')}
                                     >
                                         Applications
-                                    </NavLink>
-                                    <NavLink
-                                        href={route('bookmarks')}
-                                        active={route().current('bookmarks')}
-                                    >
-                                        Bookmarks
                                     </NavLink>
                                 </>
                                 
@@ -195,12 +183,6 @@ export default function AuthenticatedNavbar({client}) {
                                     Dashboard
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
-                                    href={route('client-explore')}
-                                    active={route().current('client-explore')}
-                                >
-                                    Explore
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
                                     href={route('client-jobs')}
                                     active={route().current('client-jobs')}
                                 >
@@ -220,12 +202,6 @@ export default function AuthenticatedNavbar({client}) {
                                     active={route().current('applications')}
                                 >
                                     Applications
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
-                                    href={route('bookmarks')}
-                                    active={route().current('bookmarks')}
-                                >
-                                    Bookmarks
                                 </ResponsiveNavLink>
                             </>
 

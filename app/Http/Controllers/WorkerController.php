@@ -12,7 +12,7 @@ class WorkerController extends Controller
 {
     public function showExplorePage(){
 
-    $jobs = Job_vacancy::with('user')->inRandomOrder()->get();
+    $jobs = Job_vacancy::with('user')->where('status', 'open')->inRandomOrder()->get();
 
         return Inertia::render('Worker/Explore')->with([
             'jobs' => $jobs

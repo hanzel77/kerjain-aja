@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Job_vacancy;
+use App\Models\Job_application;
 
 
 class ClientJobController extends Controller
@@ -77,6 +78,27 @@ class ClientJobController extends Controller
         ]);
 
         return redirect(route('client-jobs'));
+
+    }
+
+    public function handleStatus(Request $request, string $job_id, string $id){
+        $data = $request->all();
+
+        Job_application::where('id', $id)->update([
+            'status' => $data['status']
+        ]);
+
+        return redirect(route('client-jobs-detail', ['id' => $job_id]));
+    }
+
+    public function handleJobStatus(Request $request, string $job_id){
+        $data = $request->all();
+
+        Job_vacancy::where('id', $job_id)->update([
+            'status' => $data['status']
+        ]);
+
+        return redirect(route('client-jobs-detail', ['id' => $job_id]));
 
     }
 }

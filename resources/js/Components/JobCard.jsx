@@ -36,7 +36,7 @@ export default function JobCard(job) {
                         </li>
                         <li className='mt-1.5'>
                             <i className='fa fa-dollar-sign'></i>
-                            <span className='ps-2'>{job['job'].salary}</span>
+                            <span className='ps-2'>{job['job'].salary.toLocaleString()}</span>
                         </li>
                     </ul>
                 </div>

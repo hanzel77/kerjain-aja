@@ -67,7 +67,15 @@ export default function Applications(applications){
                                                 <p className="text-sm text-slate-500">{formatDate(application['created_at'])}</p>
                                             </td>
                                             <td className="p-4 border-b border-slate-200 py-5">
-                                                <p className="text-sm text-slate-500">{application.status.charAt(0).toUpperCase() + application.status.slice(1)}</p>
+                                                <p
+                                                    className={`text-sm font-normal p-4 
+                                                        ${application.status === 'interviewed' ? 'text-white bg-yellow-500 rounded w-1/2 text-center' :
+                                                        application.status === 'applied' ? 'bg-orange-500 text-white rounded w-1/2 text-center' :
+                                                        application.status === 'hired' ? 'bg-green-500 text-white rounded w-1/2 text-center' :
+                                                        application.status === 'rejected' ? 'bg-red-500 text-white rounded w-1/2 text-center ' :
+                                                    'text-slate-500'}`}>
+                                                    {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
+                                                </p>
                                             </td>
                                         </tr>
                                     )
