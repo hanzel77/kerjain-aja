@@ -1,9 +1,8 @@
 import AccessabilityIcon from "@/Components/AccessabilityIcon";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 
-export default function JobDetail(data, hasApplied) {
-
+export default function JobDetail(data) {
     function calculateDays(date) {
         const givenDate = new Date(date);
         const currentDate = new Date();
@@ -76,11 +75,11 @@ export default function JobDetail(data, hasApplied) {
 
                 <div className='flex justify-end'>
                     <button
-                        className='px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark'
-                        onClick={() => (window.location.href = '/worker/apply/' + data['data'].id)}
-                        disabled={hasApplied}
+                        className={`px-6 py-2 bg-primary text-white border border-primary rounded-md ${data.hasApplied ? 'cursor-not-allowed opacity-50' : 'hover:bg-white hover:text-primary transition-all'}`}
+                        onClick={() => (router.visit('/worker/apply/' + data['data'].id))}
+                        disabled={data.hasApplied}
                     >
-                        {hasApplied ? 'Applied' : 'Apply Now'}
+                        {data.hasApplied ? 'Applied' : 'Apply Now'}
                     </button>
 
                 </div>

@@ -40,6 +40,8 @@ class WorkerController extends Controller
             'user_id' => auth()->user()->id,
             'status' => 'applied',
             'description' => $request->description,
+            'cv_path' => $cvPath,
+            'resume_path' => $resumePath,
             'created_at' => now(),
             'updated_at' => now()
         ]);

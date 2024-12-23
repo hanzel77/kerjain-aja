@@ -14,7 +14,6 @@ class JobController extends Controller
 
         $hasApplied = Job_application::where('user_id', auth()->user()->id)->where('job_id', $id)->exists();
 
-
         return Inertia::render('Worker/JobDetail', ['data' => $data, 'hasApplied' => $hasApplied]);
     }
 

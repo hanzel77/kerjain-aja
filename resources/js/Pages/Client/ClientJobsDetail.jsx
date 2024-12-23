@@ -4,7 +4,6 @@ import AccessabilityIcon from "@/Components/AccessabilityIcon";
 import {Link} from "@inertiajs/react";
 
 export default function ClientJobsDetail(job) {
-    console.log(job.job.applications)
     return (
         <AuthenticatedLayout client={true}>
             <Head title="Job Detail" />
@@ -65,6 +64,9 @@ export default function ClientJobsDetail(job) {
                                         <p className="text-sm font-normal leading-none">Resume</p>
                                     </th>
                                     <th className="p-4 border-b border-slate-200">
+                                        <p className="text-sm font-normal leading-none">Details</p>
+                                    </th>
+                                    <th className="p-4 border-b border-slate-200">
                                         <p className="text-sm font-normal leading-none">Action</p>
                                     </th>
                                 </tr>
@@ -92,6 +94,9 @@ export default function ClientJobsDetail(job) {
                                             >
                                                 Download Resume
                                             </Link>
+                                        </td>
+                                        <td className="p-4">
+                                            {application.description}
                                         </td>
                                         <td className="p-4">
                                             {application.status === 'applied' && (
