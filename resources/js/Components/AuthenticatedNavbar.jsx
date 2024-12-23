@@ -6,7 +6,7 @@ import ApplicationLogoClient from '@/Components/ApplicationLogoClient';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function     AuthenticatedNavbar({client}) {
+export default function AuthenticatedNavbar({client}) {
 
     const user = usePage().props.auth.user;
 
@@ -91,6 +91,11 @@ export default function     AuthenticatedNavbar({client}) {
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
+                                            <img
+                                                src={user.profile_picture ? `/storage/${user.profile_picture}` : '/images/default-pp.png'}
+                                                alt="Profile"
+                                                className="h-8 w-8 rounded-full object-cover border border-gray-300"
+                                            />
                                             <button
                                                 type="button"
                                                 className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"

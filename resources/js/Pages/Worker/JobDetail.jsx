@@ -2,7 +2,7 @@ import AccessabilityIcon from "@/Components/AccessabilityIcon";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function JobDetail(data) {
+export default function JobDetail(data, hasApplied) {
 
     function calculateDays(date) {
         const givenDate = new Date(date);
@@ -23,9 +23,9 @@ export default function JobDetail(data) {
             <div className='max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-9 border mb-10'>
                 <div className='flex items-center mb-6'>
                     <img
-                        src='/images/logo-client.png'
-                        alt='Company Logo'
-                        className='w-50 h-20 object-cover mr-4'
+                        src={data['data']['user'].profile_picture ? `/storage/${data['data']['user'].profile_picture}` : '/images/default-pp.png'}
+                        alt='Client Logo'
+                        className='w-28 h-28 object-cover mr-4'
                     />
                     <div>
                         <h1 className='text-2xl font-semibold text-primary'>{data['data'].name.charAt(0).toUpperCase() + data['data'].name.slice(1)}</h1>
@@ -75,9 +75,14 @@ export default function JobDetail(data) {
                 </div>
 
                 <div className='flex justify-end'>
-                    <button className='px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark' onClick={()=>(window.location.href='/worker/apply/'+data['data'].id)}>
-                        Apply Now
+                    <button
+                        className='px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark'
+                        onClick={() => (window.location.href = '/worker/apply/' + data['data'].id)}
+                        disabled={hasApplied}
+                    >
+                        {hasApplied ? 'Applied' : 'Apply Now'}
                     </button>
+
                 </div>
             </div>
         </AuthenticatedLayout>

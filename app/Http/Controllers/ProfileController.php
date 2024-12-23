@@ -21,6 +21,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'role' => auth()->user()->role,
         ]);
     }
 
@@ -29,13 +30,20 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = $request->user();
+        $validated = $request->validated();
+        
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('profile_picture')) {
+            $validated['profile_picture'] = $request->file('profile_picture')
+                ->store('profile_pictures', 'public');
+        }
+
+        $user->fill($validated);
+        $user->save();
 
         return Redirect::route('profile.edit');
     }

@@ -19,8 +19,8 @@ export default function JobCard(job) {
         <div className='w-full bg-white mx-auto p-6 rounded-md hover:shadow-md transition-shadow border border-gray-200'>
             <div className='flex justify-between'>
                 <div className='flex'>
-                    <img src="/images/logo.png" alt="logo perusahaan" className='w-[40%] flex-shrink-0' />
-                    <div className='ps-2'>
+                    <img src={job['job']['user'].profile_picture ? `/storage/${job['job']['user'].profile_picture}` : '/images/default-pp.png'} alt="logo perusahaan" className='w-16 h-16 flex-shrink-0' />
+                    <div className='ps-4'>
                         <h1 className='text-2xl font-semibold truncate'>{job['job'].name.charAt(0).toUpperCase() + job['job'].name.slice(1)}</h1>
                         <h2 className='text-sm mt-2 text-black'>{job['job']['user'].name.charAt(0).toUpperCase() + job['job']['user'].name.slice(1)}</h2>
                     </div>

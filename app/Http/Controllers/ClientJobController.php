@@ -9,8 +9,12 @@ use App\Models\Job_vacancy;
 
 class ClientJobController extends Controller
 {
-    public function showJobsDetail(){
-        return Inertia::render('Client/ClientJobsDetail');
+    public function showJobsDetail(string $id){
+        $job = Job_vacancy::where('id', $id)->first();
+
+        return Inertia::render('Client/ClientJobsDetail')->with([
+            'job' => $job
+        ]);
     }
 
     public function showDashboardPage(){

@@ -48,7 +48,7 @@ class WorkerController extends Controller
     }
 
     public function showApplicationsPage(){
-        $applications = Job_application::with('job_vacancy')->where('user_id', auth()->user()->id)->get();
+        $applications = Job_application::with('job_vacancy.user')->where('user_id', auth()->user()->id)->get();
 
         return Inertia::render('Worker/Applications')->with([
             'applications' => $applications

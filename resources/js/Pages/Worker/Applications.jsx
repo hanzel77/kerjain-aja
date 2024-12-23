@@ -42,7 +42,8 @@ export default function Applications(applications){
                         <thead>
                             <tr className="border-b border-slate-300 bg-primary">
                                 <th className="p-4 text-sm font-normal leading-none text-white">Client</th>
-                                <th className="p-4 text-sm font-normal leading-none text-white">Name</th>
+                                <th className="p-4 text-sm font-normal leading-none text-white">Client Name</th>
+                                <th className="p-4 text-sm font-normal leading-none text-white">Job Name</th>
                                 <th className="p-4 text-sm font-normal leading-none text-white">Date Applied</th>
                                 <th className="p-4 text-sm font-normal leading-none text-white">Status</th>
                             </tr>
@@ -54,7 +55,10 @@ export default function Applications(applications){
                                     return(
                                         <tr className="hover:bg-slate-50" key={index}>
                                             <td className="p-4 border-b border-slate-200 py-5">
-                                                <img src="/images/logo.png" alt="Product 1" className="w-24 h-16 object-stretch rounded" />
+                                                <img src={application['job_vacancy']['user'].profile_picture ? `/storage/${application['job_vacancy']['user'].profile_picture}` : '/images/default-pp.png'} alt="Client logo" className="w-24 h-16 object-stretch rounded" />
+                                            </td>
+                                            <td className="p-4 border-b border-slate-200 py-5">
+                                                <p className="block font-semibold text-sm text-slate-800">{application['job_vacancy']['user'].name}</p>
                                             </td>
                                             <td className="p-4 border-b border-slate-200 py-5">
                                                 <p className="block font-semibold text-sm text-slate-800">{application['job_vacancy'].name}</p>

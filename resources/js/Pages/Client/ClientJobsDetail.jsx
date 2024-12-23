@@ -1,17 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head} from "@inertiajs/react"
-export default function ClientJobsDetail() {
-    const jobDetails = {
-        id: 1,
-        name: "Frontend Developer",
-        location: "Jakarta, Indonesia",
-        salary: 15000000,
-        type: "full-time",
-        description: "Looking for a passionate frontend developer with experience in React.",
-        accessibility: ["Remote Work", "Wheelchair Accessible"],
-        status: "open",
-        created_at: "2024-12-01",
-    };
+import AccessabilityIcon from "@/Components/AccessabilityIcon";
+
+export default function ClientJobsDetail(job) {
+    console.log(job.job)
 
     const applicants = [
         {
@@ -44,18 +36,36 @@ export default function ClientJobsDetail() {
                 <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
                     <h1 className="text-2xl font-bold text-gray-800 mb-4">Job Details</h1>
                     <div className="mb-6">
-                        <p><strong>Name:</strong> {jobDetails.name}</p>
-                        <p><strong>Location:</strong> {jobDetails.location}</p>
-                        <p><strong>Salary:</strong> Rp {jobDetails.salary.toLocaleString()}</p>
-                        <p><strong>Type:</strong> {jobDetails.type}</p>
-                        <p><strong>Description:</strong> {jobDetails.description}</p>
-                        <p>
-                            <strong>Accessibility:</strong>{" "}
-                            {jobDetails.accessibility ? jobDetails.accessibility.join(", ") : "None"}
+                        <p className="mt-2"><strong>Name:</strong> {job['job'].name}</p>
+                        <p className="mt-2"><strong>Location:</strong> {job['job'].location}</p>
+                        <p className="mt-2"><strong>Salary:</strong> Rp {job['job'].salary.toLocaleString()}</p>
+                        <p className="mt-2"><strong>Type:</strong> {job['job'].type}</p>
+                        <p className="mt-2"><strong>Description:</strong> {job['job'].description}</p>
+                        <p className="mt-2">
+                            <strong>Accessibility:</strong>
+                            <ul className="flex gap-4">
+                                {
+                                    Object.entries(JSON.parse(job['job'].accessibility)).map(([category, disabilities], index) => {
+                                        return (
+                                            <li key={index} className='flex flex-col items-center'>
+                                                <AccessabilityIcon category={category} />
+
+                                                <h4 className="mt-2 text-sm font-semibold text-gray-700">{category.replace(/_/g, ' ')}</h4>
+
+                                                <div className='text-xs text-gray-500'>
+                                                    {disabilities.map((disability, idx) => (
+                                                        <p key={idx} className='mt-1'>{disability.replace(/_/g, ' ')}</p>
+                                                    ))}
+                                                </div>
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </ul>
                         </p>
-                        <p><strong>Status:</strong> {jobDetails.status.charAt(0).toUpperCase() + jobDetails.status.slice(1)}</p>
-                        <p>
-                            <strong>Posted Date:</strong> {new Date(jobDetails.created_at).toLocaleDateString("id-ID")}
+                        <p className="mt-2"><strong>Status:</strong> {job['job'].status.charAt(0).toUpperCase() + job['job'].status.slice(1)}</p>
+                        <p className="mt-2">
+                            <strong>Posted Date:</strong> {new Date(job['job'].created_at).toLocaleDateString("id-ID")}
                         </p>
                     </div>
                     <h2 className="text-xl font-bold text-gray-800 mb-4">Applicants</h2>

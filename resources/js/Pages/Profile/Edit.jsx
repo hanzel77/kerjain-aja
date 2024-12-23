@@ -4,9 +4,9 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 
-export default function Edit({ mustVerifyEmail, status }) {
+export default function Edit({ mustVerifyEmail, status, role }) {
     return (
-        <AuthenticatedLayout client={true}>
+        <AuthenticatedLayout client={role == 'client'}>
             <Head title="Profile" />
 
             <div className="py-12">

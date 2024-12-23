@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useRef, useState } from 'react';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -12,18 +13,42 @@ export default function UpdateProfileInformation({
 }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            name: user.name,
-            email: user.email,
-        });
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
+        name: user.name,
+        email: user.email,
+        profile_picture: null,
+        _method: 'PATCH', 
+    });
+
+    const profilePictureInputRef = useRef(null);
+    const [preview, setPreview] = useState(user.profile_picture ? `/storage/${user.profile_picture}` : '/images/default-pp.png' );
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        const formData = new FormData();
+        formData.append('_method', 'PATCH');
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+
+        if (data.profile_picture) {
+            formData.append('profile_picture', data.profile_picture);
+        }
+
+        post(route('profile.update'), {
+            forceFormData: true,
+            data: formData,
+            preserveScroll: true,
+        });
     };
 
+    const handleProfilePictureChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setData('profile_picture', file);
+            setPreview(URL.createObjectURL(file));
+        }
+    };
     return (
         <section className={className}>
             <header>
@@ -35,7 +60,29 @@ export default function UpdateProfileInformation({
                     Update your account's profile information and email address.
                 </p>
             </header>
-
+            <div className="mt-6 flex items-center space-x-6">
+                <div className="relative">
+                    <img
+                        src={preview}
+                        alt="Profile Picture"
+                        className="w-24 h-24 rounded-full object-cover cursor-pointer border border-gray-300"
+                        onClick={() => profilePictureInputRef.current.click()}
+                    />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        ref={profilePictureInputRef}
+                        onChange={handleProfilePictureChange}
+                    />
+                    {errors.profile_picture && (
+                        <InputError
+                            className="mt-2"
+                            message={errors.profile_picture}
+                        />
+                    )}
+                </div>
+            </div>
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
