@@ -1,34 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head} from "@inertiajs/react"
 import AccessabilityIcon from "@/Components/AccessabilityIcon";
+import {Link} from "@inertiajs/react";
 
 export default function ClientJobsDetail(job) {
-    console.log(job.job)
-
-    const applicants = [
-        {
-            id: 1,
-            name: "Alice Smith",
-            status: "applied",
-            cv_path: "/cv/alice-smith.pdf",
-            resume_path: "/resume/alice-smith.pdf",
-        },
-        {
-            id: 2,
-            name: "Bob Johnson",
-            status: "interviewed",
-            cv_path: "/cv/bob-johnson.pdf",
-            resume_path: "/resume/bob-johnson.pdf",
-        },
-        {
-            id: 3,
-            name: "Charlie Brown",
-            status: "hired",
-            cv_path: "/cv/charlie-brown.pdf",
-            resume_path: "/resume/charlie-brown.pdf",
-        },
-    ];
-
+    console.log(job.job.applications)
     return (
         <AuthenticatedLayout client={true}>
             <Head title="Job Detail" />
@@ -41,7 +17,7 @@ export default function ClientJobsDetail(job) {
                         <p className="mt-2"><strong>Salary:</strong> Rp {job['job'].salary.toLocaleString()}</p>
                         <p className="mt-2"><strong>Type:</strong> {job['job'].type}</p>
                         <p className="mt-2"><strong>Description:</strong> {job['job'].description}</p>
-                        <p className="mt-2">
+                        <div className="mt-2">
                             <strong>Accessibility:</strong>
                             <ul className="flex gap-4">
                                 {
@@ -50,7 +26,7 @@ export default function ClientJobsDetail(job) {
                                             <li key={index} className='flex flex-col items-center'>
                                                 <AccessabilityIcon category={category} />
 
-                                                <h4 className="mt-2 text-sm font-semibold text-gray-700">{category.replace(/_/g, ' ')}</h4>
+                                                <div className="mt-2 text-sm font-semibold text-gray-700">{category.replace(/_/g, ' ')}</div>
 
                                                 <div className='text-xs text-gray-500'>
                                                     {disabilities.map((disability, idx) => (
@@ -62,7 +38,7 @@ export default function ClientJobsDetail(job) {
                                     })
                                 }
                             </ul>
-                        </p>
+                        </div>
                         <p className="mt-2"><strong>Status:</strong> {job['job'].status.charAt(0).toUpperCase() + job['job'].status.slice(1)}</p>
                         <p className="mt-2">
                             <strong>Posted Date:</strong> {new Date(job['job'].created_at).toLocaleDateString("id-ID")}
@@ -73,6 +49,9 @@ export default function ClientJobsDetail(job) {
                         <table className="w-full text-left table-auto min-w-max">
                             <thead className="bg-primary text-white">
                                 <tr>
+                                    <th className="p-4 border-b border-slate-200">
+                                        <p className="text-sm font-normal leading-none">Profile</p>
+                                    </th>
                                     <th className="p-4 border-b border-slate-200">
                                         <p className="text-sm font-normal leading-none">Name</p>
                                     </th>
@@ -85,34 +64,56 @@ export default function ClientJobsDetail(job) {
                                     <th className="p-4 border-b border-slate-200">
                                         <p className="text-sm font-normal leading-none">Resume</p>
                                     </th>
+                                    <th className="p-4 border-b border-slate-200">
+                                        <p className="text-sm font-normal leading-none">Action</p>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {applicants.map((applicant) => (
-                                    <tr key={applicant.id} className="hover:bg-slate-50 border-b border-slate-200">
-                                        <td className="p-4">{applicant.name}</td>
+                                {job.job.applications.map((application) => (
+                                    <tr key={application.id} className="hover:bg-slate-50 border-b border-slate-200">
+                                        <td className="p-4"><img src={ application.user.profile_picture ? `/storage/${application.user.profile_picture}` : '/images/default-pp.png' } alt="application picture" className="w-10 h-10 " /></td>
+                                        <td className="p-4">{application.user.name}</td>
                                         <td className="p-4">
-                                            {applicant.status.charAt(0).toUpperCase() + applicant.status.slice(1)}
+                                            {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
                                         </td>
                                         <td className="p-4">
-                                            <a
-                                                href={applicant.cv_path}
-                                                className="text-blue-500 hover:underline"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <Link
+                                                className="text-primary hover:opacity-80"
+                                                download={'storage/'+application.cv_path}
                                             >
-                                                View CV
-                                            </a>
+                                                Download CV
+                                            </Link>
                                         </td>
                                         <td className="p-4">
-                                            <a
-                                                href={applicant.resume_path}
-                                                className="text-blue-500 hover:underline"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <Link
+                                                className="text-primary hover:opacity-60"
+                                                download={'storage/'+application.resume_path}
                                             >
-                                                View Resume
-                                            </a>
+                                                Download Resume
+                                            </Link>
+                                        </td>
+                                        <td className="p-4">
+                                            {application.status === 'applied' && (
+                                                <>
+                                                    <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-white hover:text-primary transition-all border border-primary">
+                                                        Send Interview
+                                                    </button>
+                                                    <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-white border-red-600 ml-2 transition-all border hover:text-red-600">
+                                                        Reject
+                                                    </button>
+                                                </>
+                                            )}
+                                            {application.status === 'interview' && (
+                                                <>
+                                                    <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                                                        Accept
+                                                    </button>
+                                                    <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 ml-2">
+                                                        Reject
+                                                    </button>
+                                                </>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}

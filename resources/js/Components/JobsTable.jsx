@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { router } from '@inertiajs/react'
 import { useState } from "react";
 
 export default function JobsTable({ data }) {
@@ -48,7 +48,7 @@ export default function JobsTable({ data }) {
                             });
 
                             return (
-                                <tr className="hover:bg-slate-50 border-b border-slate-200" onClick={()=>{window.location.href = `/client/jobs/${job.id}`}}>
+                                <tr className="hover:bg-slate-50 border-b border-slate-200" onClick={() => { router.visit(`/client/jobs/${job.id}`) }}>
                                     <td className="p-4 py-5">
                                         <p className="block font-semibold text-sm text-slate-800">
                                             {startIndex + index + 1}

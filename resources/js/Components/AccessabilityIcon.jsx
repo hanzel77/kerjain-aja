@@ -1,5 +1,4 @@
 export default function AccessabilityIcon( category ) {
-    console.log(category['category']);
     const accessibility = {
         'Vision': {
             'icon': 'fa fa-eye-slash',
@@ -39,11 +38,11 @@ export default function AccessabilityIcon( category ) {
     };
 
     return (
-        <li className="flex items-center mt-3 mx-1.5 group relative">
+        <div className="flex items-center mt-3 mx-1.5 group relative">
             <i className={`${accessibility[category['category']].icon} ${accessibility[category['category']].color} text-lg group-hover:opacity-50 transition-opacity duration-300`}></i>
             <span className="absolute top-full left-0 hidden group-hover:block bg-gray-800 text-white text-xs px-2 py-1 rounded-md mt-1">
                 {accessibility[category['category']].label}
             </span>
-        </li>
+        </div>
     );
 }
