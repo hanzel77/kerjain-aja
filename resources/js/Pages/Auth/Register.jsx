@@ -25,9 +25,9 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} aria-labelledby="register-form">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Name" aria-label="Full Name" />
 
                     <TextInput
                         id="name"
@@ -38,13 +38,15 @@ export default function Register() {
                         isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
                         required
+                        aria-required="true"
+                        aria-describedby="name-error"
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.name} className="mt-2" id="name-error" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="Email" aria-label="Email Address" />
 
                     <TextInput
                         id="email"
@@ -55,13 +57,15 @@ export default function Register() {
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
+                        aria-required="true"
+                        aria-describedby="email-error"
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} className="mt-2" id="email-error" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="Password" aria-label="Password" />
 
                     <TextInput
                         id="password"
@@ -72,15 +76,18 @@ export default function Register() {
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
+                        aria-required="true"
+                        aria-describedby="password-error"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-2" id="password-error" />
                 </div>
 
                 <div className="mt-4">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Confirm Password"
+                        aria-label="Confirm Password"
                     />
 
                     <TextInput
@@ -94,11 +101,14 @@ export default function Register() {
                             setData('password_confirmation', e.target.value)
                         }
                         required
+                        aria-required="true"
+                        aria-describedby="password_confirmation-error"
                     />
 
                     <InputError
                         message={errors.password_confirmation}
                         className="mt-2"
+                        id="password_confirmation-error"
                     />
                 </div>
 
@@ -106,11 +116,12 @@ export default function Register() {
                     <Link
                         href={route('login')}
                         className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                        aria-label="Go to login page"
                     >
                         Already registered?
                     </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="ms-4" disabled={processing} aria-label="Register account">
                         Register
                     </PrimaryButton>
                 </div>

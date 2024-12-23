@@ -26,12 +26,12 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Log in" />
 
             {status && (
-                <div className="mb-4 text-sm font-medium text-green-600">
+                <div className="mb-4 text-sm font-medium text-green-600" role="alert">
                     {status}
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} aria-labelledby="login-form" role="form">
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -44,9 +44,12 @@ export default function Login({ status, canResetPassword }) {
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
+                        required
+                        aria-required="true"
+                        aria-describedby="email-error"
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} className="mt-2" id="email-error" />
                 </div>
 
                 <div className="mt-4">
@@ -60,9 +63,12 @@ export default function Login({ status, canResetPassword }) {
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
+                        required
+                        aria-required="true"
+                        aria-describedby="password-error"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-2" id="password-error" />
                 </div>
 
                 <div className="mt-4 block">
@@ -74,8 +80,9 @@ export default function Login({ status, canResetPassword }) {
                                 onChange={(e) =>
                                     setData('remember', e.target.checked)
                                 }
+                                aria-labelledby="remember-label"
                             />
-                            <span className="ms-2 text-sm text-gray-600">
+                            <span className="ms-2 text-sm text-gray-600" id="remember-label">
                                 Remember me
                             </span>
                         </div>
@@ -84,6 +91,7 @@ export default function Login({ status, canResetPassword }) {
                             <Link
                                 href={route('password.request')}
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                                aria-label="Forgot password link"
                             >
                                 Forgot your password?
                             </Link>
@@ -95,11 +103,12 @@ export default function Login({ status, canResetPassword }) {
                     <Link
                         href={route('register')}
                         className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                        aria-label="Go to register page"
                     >
-                        Dont have an account?
+                        Don't have an account?
                     </Link>
-                    
-                    <PrimaryButton className="ms-4" disabled={processing}>
+
+                    <PrimaryButton className="ms-4" disabled={processing} aria-label="Log in to your account">
                         Log in
                     </PrimaryButton>
                 </div>

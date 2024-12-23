@@ -88,8 +88,8 @@ export default function ClientCreateJob() {
         <AuthenticatedLayout client={true}>
             <Head title="Create Job" />
             <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg border my-9">
-                <h1 className="text-2xl font-semibold text-gray-800 mb-6">Create a new job</h1>
-                <form onSubmit={handleSubmit}>
+                <h1 className="text-2xl font-semibold text-gray-800 mb-6" aria-labelledby="create-job-heading">Create a new job</h1>
+                <form onSubmit={handleSubmit} aria-labelledby="create-job-form">
                     {/* Job Name */}
                     <div className="mb-4">
                         <InputLabel htmlFor="name" value="Job Name" />
@@ -100,6 +100,7 @@ export default function ClientCreateJob() {
                             onChange={(e) => setData('name', e.target.value)}
                             className="mt-1 block w-full"
                             required
+                            aria-required="true"
                         />
                         {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
                     </div>
@@ -112,6 +113,7 @@ export default function ClientCreateJob() {
                             options={cities}
                             onChange={(location) => setData('location', location)}
                             className="p-3"
+                            aria-labelledby="location-label"
                         />
                     </div>
 
@@ -127,6 +129,7 @@ export default function ClientCreateJob() {
                             onChange={(e) => setData('salary', e.target.value)}
                             className="mt-1 block w-full"
                             required
+                            aria-required="true"
                         />
                         {errors.salary && <div className="text-red-500 text-sm">{errors.salary}</div>}
                     </div>
@@ -138,6 +141,7 @@ export default function ClientCreateJob() {
                             value={data.type}
                             options={['Full-time', 'Part-time', 'Intern']}
                             onChange={(value) => setData('type', value)}
+                            aria-labelledby="type-label"
                         />
                         {errors.type && <div className="text-red-500 text-sm">{errors.type}</div>}
                     </div>
@@ -152,6 +156,7 @@ export default function ClientCreateJob() {
                             onChange={(e) => setData('description', e.target.value)}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                             required
+                            aria-required="true"
                         />
                         {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
                     </div>
@@ -160,190 +165,45 @@ export default function ClientCreateJob() {
                     <div className="mb-4">
                         <InputLabel htmlFor="accessibility" value="Accessibility" />
                         <div className="grid grid-cols-2 gap-4">
-                            {/* Vision Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Vision</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Vision').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
+                            {['Vision', 'Hearing', 'Motor', 'Cognitive', 'Speech', 'Mental Health', 'Other'].map(category => (
+                                <div key={category}>
+                                    <h3 className="text-lg font-semibold text-gray-700 mb-2" id={`${category.toLowerCase()}-label`}>{category}</h3>
+                                    <div className="space-y-2">
+                                        {accessibilityOptions.filter(option => option.category === category).map((option) => (
+                                            <InputCheckbox
+                                                key={option.value}
+                                                id={option.value}
+                                                label={option.label}
+                                                checked={data.accessibility.includes(option.value)}
+                                                onChange={(e) => {
+                                                    const updatedAccessibility = e.target.checked
+                                                        ? [...data.accessibility, option.value]
+                                                        : data.accessibility.filter(item => item !== option.value);
 
-                                                setData('accessibility', updatedAccessibility);
+                                                    setData('accessibility', updatedAccessibility);
 
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
+                                                    console.log("Updated Accessibility (array):", updatedAccessibility);
+                                                }}
+                                                aria-labelledby={`${category.toLowerCase()}-label`}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-
-                            {/* Hearing Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Hearing</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Hearing').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Motor Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Motor</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Motor').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Cognitive Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Cognitive</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Cognitive').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Speech Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Speech</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Speech').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Mental Health Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Mental Health</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Mental Health').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Other Category */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Other</h3>
-                                <div className="space-y-2">
-                                    {accessibilityOptions.filter(option => option.category === 'Other').map((option) => (
-                                        <InputCheckbox
-                                            key={option.value}
-                                            id={option.value}
-                                            label={option.label}
-                                            checked={data.accessibility.includes(option.value)} 
-                                            onChange={(e) => {
-                                                const updatedAccessibility = e.target.checked
-                                                    ? [...data.accessibility, option.value] 
-                                                    : data.accessibility.filter(item => item !== option.value);
-
-                                                setData('accessibility', updatedAccessibility);
-
-                                                console.log("Updated Accessibility (array):", updatedAccessibility);
-                                            }}
-                                        />
-
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </div>
-
                         {errors.accessibility && <div className="text-red-500 text-sm">{errors.accessibility}</div>}
                     </div>
 
                     {/* Submit Button */}
                     <div className="flex justify-center mt-6">
-                        <PrimaryButton type="submit" className='w-1/2 justify-center py-2'>Create Job</PrimaryButton>
+                        <PrimaryButton type="submit" className='w-1/2 justify-center py-2' aria-label="Create Job">
+                            Create Job
+                        </PrimaryButton>
                     </div>
+
+                    {/* Error Message */}
+                    {errors.form && <div className="text-red-500 text-sm mt-3">{errors.form}</div>}
                 </form>
-                {errors.form && <div className="text-red-500 text-sm mt-4">{errors.form}</div>}
             </div>
         </AuthenticatedLayout>
     );

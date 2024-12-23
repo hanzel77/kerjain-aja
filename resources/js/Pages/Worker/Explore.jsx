@@ -57,8 +57,8 @@ export default function Explore({ jobs }) {
                 </div>
             </div>
 
-            <div className="flex">
-                <div className="w-1/4 px-6">
+            <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-1/4 px-6">
                     <div className="border p-4 rounded-lg shadow bg-white sticky top-3">
                         <h3 className="text-lg font-semibold mb-4 text-primary">Filters</h3>
 
@@ -120,7 +120,7 @@ export default function Explore({ jobs }) {
                     </div>
                 </div>
 
-                <div className="w-3/4 grid grid-cols-3 gap-8 px-6">
+                <div className="w-full lg:w-3/4 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 xl:grid-cols-3 gap-8 px-6 mt-4 lg:mt-0">
                     {filteredJobs.length !== 0 ? (
                         filteredJobs.map((job) => (
                             <Link href={`/job-detail/${job.id}`} key={job.id}>

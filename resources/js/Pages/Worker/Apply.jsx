@@ -44,14 +44,15 @@ export default function Apply(id) {
         <AuthenticatedLayout>
             <Head title="Apply for Job" />
             <div className="max-w-xl mx-auto p-6 border border-gray-200 rounded-lg shadow-sm bg-white mt-10">
-                <h2 className="text-2xl font-bold mb-4">Apply for Job</h2>
+                <h2 className="text-2xl font-bold mb-4" id="apply-job-heading">Apply for Job</h2>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} aria-labelledby="apply-job-heading">
                     <div className="mb-4">
                         <InputLabel value="Upload CV" />
                         <label
                             htmlFor="cv-upload"
                             className="inline-block w-full cursor-pointer bg-secondary text-white py-2 px-4 text-center rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                            aria-label="Upload CV"
                         >
                             {data.cv ? data.cv.name : "Choose a CV file"}
                         </label>
@@ -61,8 +62,9 @@ export default function Apply(id) {
                             accept=".pdf,.doc,.docx"
                             onChange={(e) => handleFileChange(e, (file) => setData('cv', file))}
                             className="hidden"
+                            aria-describedby="cv-upload-description"
                         />
-                        {errors.cv && <div className="text-red-500 text-sm">{errors.cv}</div>}
+                        {errors.cv && <div className="text-red-500 text-sm" id="cv-upload-description">{errors.cv}</div>}
                     </div>
 
                     <div className="mb-4">
@@ -70,6 +72,7 @@ export default function Apply(id) {
                         <label
                             htmlFor="resume-upload"
                             className="inline-block w-full cursor-pointer bg-secondary text-white py-2 px-4 text-center rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                            aria-label="Upload Resume"
                         >
                             {data.resume ? data.resume.name : "Choose a Resume file"}
                         </label>
@@ -79,8 +82,9 @@ export default function Apply(id) {
                             accept=".pdf,.doc,.docx"
                             onChange={(e) => handleFileChange(e, (file) => setData('resume', file))}
                             className="hidden"
+                            aria-describedby="resume-upload-description"
                         />
-                        {errors.resume && <div className="text-red-500 text-sm">{errors.resume}</div>}
+                        {errors.resume && <div className="text-red-500 text-sm" id="resume-upload-description">{errors.resume}</div>}
                     </div>
 
                     <div className="mb-4">
@@ -92,17 +96,19 @@ export default function Apply(id) {
                             onChange={(e) => setData('description', e.target.value)}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                             required
+                            aria-required="true"
+                            aria-label="Cover letter/Description field"
                         />
                         {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
                     </div>
 
                     <div className="flex justify-center mt-6">
-                        <PrimaryButton type="submit" className="w-1/2 justify-center py-2">
+                        <PrimaryButton type="submit" className="w-1/2 justify-center py-2" aria-label="Submit application">
                             Apply for Job
                         </PrimaryButton>
                     </div>
                 </form>
-                {errors.form && <div className="text-red-500 text-sm mt-4">{errors.form}</div>}
+                {errors.form && <div className="text-red-500 text-sm mt-4" aria-live="assertive">{errors.form}</div>}
             </div>
         </AuthenticatedLayout>
     );
